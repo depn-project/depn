@@ -1,30 +1,15 @@
-use core::fmt;
 use std::ops::Deref;
 
-mod openvpn;
+mod protocol;
+
 mod wireguard;
 
-pub use openvpn::OpenVPN;
 use prettytable::{row, table};
+pub use protocol::{Protocol, ProtocolConfig, ProtocolInfo};
 pub use wireguard::WireGuard;
 
 pub struct Connection {
     ip: std::net::Ipv4Addr,
-}
-
-pub struct ProtocolInfo {
-    pub id: usize,
-    pub name: String,
-}
-
-impl fmt::Display for ProtocolInfo {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "ID: {}\nName: {}", self.id, self.name)
-    }
-}
-
-pub trait Protocol {
-    fn get_info(&self) -> ProtocolInfo;
 }
 
 pub fn print_protocols_table(protocols: Vec<ProtocolInfo>) {
@@ -44,7 +29,7 @@ pub struct Manager<'a> {
 
 impl<'a> Manager<'a> {
     pub fn new() -> Self {
-        Manager {
+        Self {
             connections: vec![],
             protocols: vec![],
         }

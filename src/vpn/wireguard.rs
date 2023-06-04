@@ -1,4 +1,4 @@
-use super::{Protocol, ProtocolInfo};
+use super::{Protocol, ProtocolConfig, ProtocolInfo};
 
 pub struct WireGuard {
     info: ProtocolInfo,
@@ -21,5 +21,13 @@ impl Protocol for WireGuard {
             name: self.info.name.clone(),
             ..self.info
         }
+    }
+
+    fn create_config(&self) -> ProtocolConfig {
+        todo!()
+    }
+
+    fn remove_config(&self) {
+        todo!()
     }
 }
