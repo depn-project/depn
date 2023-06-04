@@ -1,1 +1,1 @@
-# depn
+# Decentralized private network (depn)
